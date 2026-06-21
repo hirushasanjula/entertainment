@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🤪 The Stupid Questions Machine
 
-## Getting Started
+A chaotic, animated "fun" quiz built with **Next.js**, **TypeScript**, **Tailwind CSS**, **Prisma** and **MongoDB**. Everything is for entertainment only — don't take it too seriously. 😆
 
-First, run the development server:
+## ✨ Features
+
+- Animated rainbow gradient background, wobbling/popping text, and emoji-rain confetti
+- A dodging "NO" button that runs from your cursor/finger (mobile-safe)
+- A branching flow that reacts to your answers:
+  - "Are you really stupid?" → roast
+  - Gender select (saved to MongoDB)
+  - Female path: good girl? → rate how bad → $1,000,000 dilemma → how many boyfriends → outro
+- Global ⬅️ back navigation on every screen
+- Fully responsive (phone → desktop)
+- Selections persisted to MongoDB via a Prisma model and a `POST /api/selection` route
+
+## 🛠️ Tech stack
+
+- [Next.js](https://nextjs.org) (App Router) + React + TypeScript
+- [Tailwind CSS v4](https://tailwindcss.com)
+- [Prisma](https://www.prisma.io) ORM with MongoDB
+- [MongoDB](https://www.mongodb.com) (Atlas or local)
+
+## 🚀 Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Create a `.env.local` (see `.env.example`):
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+MONGODB_URI=mongodb://localhost:27017/entertainment
+DATABASE_URL=mongodb://localhost:27017/entertainment
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+> Prisma for MongoDB needs a database name in the URL, so `DATABASE_URL` is set separately from `MONGODB_URI`.
 
-## Learn More
+Generate the Prisma client and run the dev server:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npx prisma generate
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📁 Project structure
 
-## Deploy on Vercel
+- `src/app/page.tsx` — the quiz orchestrator (stage machine)
+- `src/components/` — each screen + reusable bits (EmojiRain, DodgeButton, RainbowText, BackButton, …)
+- `src/data/questions.ts` — the stupid questions
+- `src/app/api/selection/route.ts` — saves gender selections to MongoDB
+- `prisma/schema.prisma` — the `Selection` model
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Made with way too much chaos • Next.js + Tailwind
