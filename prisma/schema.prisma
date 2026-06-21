@@ -1,0 +1,18 @@
+// Prisma schema for MongoDB.
+// Docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// One row per visitor who picks male/female on the quiz.
+model Selection {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  gender    String
+  createdAt DateTime @default(now())
+}

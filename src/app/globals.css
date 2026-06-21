@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a14;
+  --foreground: #ffffff;
 }
 
 @theme inline {
@@ -12,15 +12,162 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+/* ---------- Animated rainbow gradient background ---------- */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animated-bg {
+  background: linear-gradient(
+    -45deg,
+    #ff0080,
+    #7928ca,
+    #2afadf,
+    #ff4d4d,
+    #f9cb28,
+    #4d79ff
+  );
+  background-size: 400% 400%;
+  animation: gradient-shift 12s ease infinite;
+}
+
+/* ---------- Wobble / bounce title ---------- */
+@keyframes wobble {
+  0%,
+  100% {
+    transform: rotate(-3deg) scale(1);
+  }
+  50% {
+    transform: rotate(3deg) scale(1.05);
+  }
+}
+.animate-wobble {
+  animation: wobble 2.5s ease-in-out infinite;
+}
+
+/* ---------- Pop in ---------- */
+@keyframes pop-in {
+  0% {
+    transform: scale(0.3) rotate(-10deg);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.1) rotate(2deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+.animate-pop-in {
+  animation: pop-in 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28) both;
+}
+
+/* ---------- Jiggle on hover (used by buttons) ---------- */
+@keyframes jiggle {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-6deg);
+  }
+  75% {
+    transform: rotate(6deg);
+  }
+}
+.hover\:animate-jiggle:hover {
+  animation: jiggle 0.3s ease-in-out infinite;
+}
+
+/* ---------- Floating ---------- */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* ---------- Letter-by-letter rainbow ---------- */
+@keyframes rainbow-text {
+  0% {
+    color: #ff0080;
+  }
+  20% {
+    color: #ff8c00;
+  }
+  40% {
+    color: #f9cb28;
+  }
+  60% {
+    color: #2afadf;
+  }
+  80% {
+    color: #7928ca;
+  }
+  100% {
+    color: #ff0080;
+  }
+}
+.animate-rainbow {
+  animation: rainbow-text 3s linear infinite;
+}
+
+/* ---------- Falling emoji ---------- */
+@keyframes fall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0.9;
+  }
+}
+.animate-fall {
+  animation: fall linear forwards;
+}
+
+/* ---------- Shake (for the chaos) ---------- */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-8px);
+  }
+  40% {
+    transform: translateX(8px);
+  }
+  60% {
+    transform: translateX(-6px);
+  }
+  80% {
+    transform: translateX(6px);
+  }
+}
+.animate-shake {
+  animation: shake 0.4s ease-in-out;
 }
