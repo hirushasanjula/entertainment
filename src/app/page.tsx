@@ -12,6 +12,7 @@ import BadRatingScreen from "@/components/BadRatingScreen";
 import BoyfriendCountScreen from "@/components/BoyfriendCountScreen";
 import BoyfriendResultScreen from "@/components/BoyfriendResultScreen";
 import OutroScreen from "@/components/OutroScreen";
+import MaleScreen from "@/components/MaleScreen";
 import BackButton from "@/components/BackButton";
 
 type Stage =
@@ -19,6 +20,7 @@ type Stage =
   | "confirm"
   | "roast"
   | "gender"
+  | "male"
   | "goodgirl"
   | "badrate"
   | "boycount"
@@ -89,7 +91,7 @@ export default function Home() {
     if (choice === "female") {
       go("goodgirl");
     } else {
-      start();
+      go("male");
     }
   };
 
@@ -201,6 +203,9 @@ export default function Home() {
 
       {/* ---------------- GENDER (looks like you're interested) ---------------- */}
       {stage === "gender" && <GenderScreen onSelect={chooseGender} />}
+
+      {/* ---------------- MALE (coming soon dead-end) ---------------- */}
+      {stage === "male" && <MaleScreen />}
 
       {/* ---------------- GOOD GIRL? (female only) ---------------- */}
       {stage === "goodgirl" && (
